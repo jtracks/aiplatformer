@@ -1,6 +1,6 @@
 import pygame as pg
 from Config import SCREEN, MAIN_CHARACTER
-from AssetLoader import ANIMATIONS_MAIN_CHAR
+from AssetLoader import ANIMATIONS_CHAR
 
 SCREEN_HEIGHT, SCREEN_WIDTH = SCREEN['SIZE']
 
@@ -14,12 +14,16 @@ class Character(pg.sprite.Sprite):
     state = 'IDLE' # ['DOUBLE JUMP', 'FALL', 'HIT', 'IDLE', 'JUMP', 'RUN', 'WALL JUMP']
     state_img = 0
     direction = 'RIGHT' #['LEFT', 'RIGHT']
+    double_jump = True
+    level = None
+    level_no = 0
 
-    def __init__(self, name='Player 1'):
+    def __init__(self, name='Player 1', character='Ninja frog'):
         super(Character, self).__init__()
 
         self.name = name
-        self.image = ANIMATIONS_MAIN_CHAR[self.state][self.state_img]
+        self.character = character
+        self.image = ANIMATIONS_CHAR[character][self.state][self.state_img]
         self.rect = self.image.get_rect()
 
     def update(self):
@@ -33,6 +37,7 @@ class Character(pg.sprite.Sprite):
         if self.tick == 3:
             self.tick = 1
             self._animation_tick()
+            self._tint_image()
         else:
             self.tick += 1
 
@@ -91,15 +96,16 @@ class Character(pg.sprite.Sprite):
             if self.speed_y > 0:
                 self.rect.bottom = block.rect.top
                 self.speed_y = 0
-                if self.state == 'FALL':
+                if self.state in ['FALL', 'WALL JUMP']:
                     self._change_state('IDLE')
+                    self.double_jump = True
             else:
                 self.rect.top = block.rect.bottom
                 self.speed_y = 0
 
     def _animation_tick(self):
         ''' Swap surface to next in animation '''
-        animations = ANIMATIONS_MAIN_CHAR[self.state]
+        animations = ANIMATIONS_CHAR[self.character][self.state]
         if self.state_img == len(animations):
             self.state_img = 0        
         
@@ -135,9 +141,10 @@ class Character(pg.sprite.Sprite):
                 else:
                     self.speed_x = 15
             self._change_state('JUMP')
-        elif self.state in ['FALL']:
+        elif self.state in ['FALL'] and self.double_jump:
             self.speed_y = -10
             self._change_state('DOUBLE JUMP')
+            self.double_jump = False
 
     def right(self):
         ''' Move right button call '''
@@ -156,6 +163,9 @@ class Character(pg.sprite.Sprite):
         if self.state == 'IDLE':
             self._change_state('RUN')
 
+    def _tint_image(self):
+        ''' for subclasses to be able to tint '''
+        pass
         
 if __name__ == '__main__':
 

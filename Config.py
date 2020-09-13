@@ -1,33 +1,32 @@
 '''
 Import configurations from this class
 '''
+
+NUMBER_OF_BOTS = 10
+NUMBER_OF_AI = 1
+FPS = 60
+
 # Screen dimensions
 SCREEN = {
-    'SIZE': (800, 600)
+    'SIZE': (1600, 1200) #(800, 600)
 }
 
 # 'Mask Dude', 'Ninja frog', 'Pink Man', 'Virtual Guy'
 MAIN_CHARACTER =  {
-    'NAME': 'Ninja Frog',
-    'SIZE': (64, 64)
-}
-
-BACKGROUND = {
+    'NAME': ['Mask Dude', 'Ninja frog', 'Pink Man', 'Virtual Guy'],
     'SIZE': (64, 64)
 }
 
 TERRAIN = {
+    'NAME': ['Gray Stone', 'Green Dirt', 'Wood', 'Yellow Dirt', 'Bricks', 'Leafs', 'Pink Dirt'],
+    'OFFSET': [0, 6, 88, 94, 105, 176, 182],
     'SIZE': (32, 32)
 }
 
-# Asset names for animations
-ANIMATION_LENGTH = 8
-DOUBLE_JUMP = 'Double Jump (32x32).png'
-FALL = 'Fall (32x32).png'
-HIT = 'Hit (32x32).png'
-IDLE = 'Idle (32x32).png'
-JUMP = 'Jump (32x32).png'
-RUN = 'Run (32x32).png'
-WALL_JUMP = 'Wall Jump (32x32).png'
+BACKGROUND = {
+    'NAME': ['Blue', 'Brown', 'Gray', 'Green', 'Pink', 'Purple', 'Yellow'],
+    'SIZE': (64, 64)
+}
+
 
 
