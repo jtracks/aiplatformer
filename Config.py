@@ -13,12 +13,12 @@ SCREEN = {
 
 # 'Mask Dude', 'Ninja frog', 'Pink Man', 'Virtual Guy'
 MAIN_CHARACTER =  {
-    'NAME': ['Mask Dude', 'Ninja frog', 'Pink Man', 'Virtual Guy'],
+    'NAME': ['Mask_Dude', 'Ninja_frog', 'Pink_Man', 'Virtual_Guy'],
     'SIZE': (64, 64)
 }
 
 TERRAIN = {
-    'NAME': ['Gray Stone', 'Green Dirt', 'Wood', 'Yellow Dirt', 'Bricks', 'Leafs', 'Pink Dirt'],
+    'NAME': ['Gray_Stone', 'Green_Dirt', 'Wood', 'Yellow_Dirt', 'Bricks', 'Leafs', 'Pink_Dirt'],
     'OFFSET': [0, 6, 88, 94, 105, 176, 182],
     'SIZE': (32, 32)
 }

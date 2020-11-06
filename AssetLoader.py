@@ -40,7 +40,7 @@ def fill_background(bgr_image):
 
     return background 
 
-PATH_TO_CHAR = join('assets', 'Main Characters')
+PATH_TO_CHAR = join('assets', 'Main_Characters')
 PATH_TO_BACKGROUND = join('assets', 'Background')
 PATH_TO_TERRAIN = join('assets', 'Terrain')
 
@@ -49,13 +49,13 @@ ANIMATIONS_CHAR = {}
 for character in MAIN_CHARACTER['NAME']:
 
     ANIMATIONS_CHAR[character] = {
-        'DOUBLE JUMP': load_asset(join(PATH_TO_CHAR, character, 'Double Jump (32x32).png'), MAIN_CHARACTER['SIZE'], (6, 1)),
-        'FALL': load_asset(join(PATH_TO_CHAR, character, 'Fall (32x32).png'), MAIN_CHARACTER['SIZE'], (1, 1)),
-        'HIT': load_asset(join(PATH_TO_CHAR, character, 'Hit (32x32).png'), MAIN_CHARACTER['SIZE'], (7, 1)),
-        'IDLE': load_asset(join(PATH_TO_CHAR, character, 'Idle (32x32).png'), MAIN_CHARACTER['SIZE'], (11, 1)),
-        'JUMP': load_asset(join(PATH_TO_CHAR, character, 'Jump (32x32).png'), MAIN_CHARACTER['SIZE'], (1, 1)),
-        'RUN': load_asset(join(PATH_TO_CHAR, character, 'Run (32x32).png'), MAIN_CHARACTER['SIZE'], (12, 1)),
-        'WALL JUMP': load_asset(join(PATH_TO_CHAR, character, 'Wall Jump (32x32).png'), MAIN_CHARACTER['SIZE'], (5, 1))
+        'DOUBLE JUMP': load_asset(join(PATH_TO_CHAR, character, 'Double_Jump_(32x32).png'), MAIN_CHARACTER['SIZE'], (6, 1)),
+        'FALL': load_asset(join(PATH_TO_CHAR, character, 'Fall_(32x32).png'), MAIN_CHARACTER['SIZE'], (1, 1)),
+        'HIT': load_asset(join(PATH_TO_CHAR, character, 'Hit_(32x32).png'), MAIN_CHARACTER['SIZE'], (7, 1)),
+        'IDLE': load_asset(join(PATH_TO_CHAR, character, 'Idle_(32x32).png'), MAIN_CHARACTER['SIZE'], (11, 1)),
+        'JUMP': load_asset(join(PATH_TO_CHAR, character, 'Jump_(32x32).png'), MAIN_CHARACTER['SIZE'], (1, 1)),
+        'RUN': load_asset(join(PATH_TO_CHAR, character, 'Run_(32x32).png'), MAIN_CHARACTER['SIZE'], (12, 1)),
+        'WALL JUMP': load_asset(join(PATH_TO_CHAR, character, 'Wall_Jump_(32x32).png'), MAIN_CHARACTER['SIZE'], (5, 1))
     }
 
 # Background tiles
@@ -64,7 +64,7 @@ for bgr in BACKGROUND['NAME']:
     BACKGROUNDS[bgr] = fill_background(load_asset(join(PATH_TO_BACKGROUND, f'{bgr}.png'), BACKGROUND['SIZE'], (1,1)))
 
 # Load terrains, kinda weirdly done but works
-t = load_asset(join(PATH_TO_TERRAIN,'Terrain (16x16).png'),TERRAIN['SIZE'], (22,11))
+t = load_asset(join(PATH_TO_TERRAIN,'Terrain_(16x16).png'),TERRAIN['SIZE'], (22,11))
 TERRAINS = {}
 for terrain_name, offset  in zip(TERRAIN['NAME'], TERRAIN['OFFSET']):
     TERRAINS[terrain_name] = {
