@@ -8,12 +8,12 @@ FPS = 60
 
 # Screen dimensions
 SCREEN = {
-    'SIZE': (1600, 1200) #(800, 600)
+    'SIZE': (1000, 750) #(800, 600)
 }
 
 # 'Mask Dude', 'Ninja frog', 'Pink Man', 'Virtual Guy'
 MAIN_CHARACTER =  {
-    'NAME': ['Mask_Dude', 'Ninja_frog', 'Pink_Man', 'Virtual_Guy'],
+    'NAME': ['Mask_Dude', 'Ninja_Frog', 'Pink_Man', 'Virtual_Guy'],
     'SIZE': (64, 64)
 }
 

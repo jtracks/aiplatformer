@@ -22,7 +22,7 @@ def game_loop():
     screen = pg.display.set_mode(SCREEN['SIZE'])
     pg.display.set_caption("Ai-game")
  
-    player = Character(character='Ninja_frog')
+    player = Character(character='Ninja_Frog')
     bots = [CharacterBot(name=f'Bot{i}', character=random.choice(MAIN_CHARACTER['NAME'])) for i in range(NUMBER_OF_BOTS)]
     machines = [] #[CharacterAI(name=f'AI{i}', character=random.choice(MAIN_CHARACTER['NAME'])) for i in range(NUMBER_OF_AI)]
 
