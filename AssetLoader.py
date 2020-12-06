@@ -43,6 +43,8 @@ def fill_background(bgr_image):
 PATH_TO_CHAR = join('assets', 'Main_Characters')
 PATH_TO_BACKGROUND = join('assets', 'Background')
 PATH_TO_TERRAIN = join('assets', 'Terrain')
+PATH_TO_ITEMS = join('assets','Items','Fruits')
+PATH_TO_CHECKPOINTS = join('assets','Items','Checkpoints','Checkpoint')
 
 # Animations for the main character
 ANIMATIONS_CHAR = {}
@@ -62,6 +64,16 @@ for character in MAIN_CHARACTER['NAME']:
 BACKGROUNDS = {}
 for bgr in BACKGROUND['NAME']:
     BACKGROUNDS[bgr] = fill_background(load_asset(join(PATH_TO_BACKGROUND, f'{bgr}.png'), BACKGROUND['SIZE'], (1,1)))
+
+# Collectibles 
+COLLECTIBLES = {}
+for item in COLLECTIBLE['NAME']:
+    COLLECTIBLES[item] = load_asset(join(PATH_TO_ITEMS,'Apple.png'),COLLECTIBLE['SIZE'],(17,1))
+
+CHECKPOINTS = {}
+for item in CHECKPOINT['NAME']: 
+    CHECKPOINTS[item] = load_asset(join(PATH_TO_CHECKPOINTS,'Checkpoint_(Flag_Out)_(64x64).png'),CHECKPOINT['SIZE'],(26,1))
+
 
 # Load terrains, kinda weirdly done but works
 t = load_asset(join(PATH_TO_TERRAIN,'Terrain_(16x16).png'),TERRAIN['SIZE'], (22,11))
