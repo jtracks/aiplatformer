@@ -15,6 +15,7 @@ from Config import SCREEN, MAIN_CHARACTER, TERRAIN, BACKGROUND, NUMBER_OF_BOTS, 
 from itertools import chain
 
 SCREEN_HEIGHT, SCREEN_WIDTH = SCREEN['SIZE']
+global level_list 
 
 def game_loop():
     ''' Main loop for the game engine '''
@@ -27,6 +28,7 @@ def game_loop():
     machines = [] #[CharacterAI(name=f'AI{i}', character=random.choice(MAIN_CHARACTER['NAME'])) for i in range(NUMBER_OF_AI)]
 
     # Create all the levels
+
     level_list = [
         Level(player,lvl_type=random.choice(BACKGROUND['NAME']),ter_type=random.choice(TERRAIN['NAME'])),
         Level(player,lvl_type=random.choice(BACKGROUND['NAME']),ter_type=random.choice(TERRAIN['NAME'])),
@@ -96,7 +98,7 @@ def game_loop():
 
             # If any player gets to the end of the level, go to the next level
             current_position = char.rect.x + current_level.world_shift
-            if current_position < current_level.level_limit:
+            if char.is_finished(): #"current_position < current_level.level_limit or" 
                 char.rect.x = 340
                 char.rect.y = SCREEN_HEIGHT / 4
                 if char.level_no < len(level_list)-1:

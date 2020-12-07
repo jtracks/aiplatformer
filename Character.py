@@ -2,6 +2,7 @@ import pygame as pg
 from Config import SCREEN, MAIN_CHARACTER
 from AssetLoader import ANIMATIONS_CHAR
 
+
 SCREEN_HEIGHT, SCREEN_WIDTH = SCREEN['SIZE']
 
 class Character(pg.sprite.Sprite):
@@ -171,15 +172,19 @@ class Character(pg.sprite.Sprite):
         pass
 
     def _collect(self):
+        import Game
+
         for coin in pg.sprite.spritecollide(self, self.level.collectibles, False):
             self.level.collectibles.remove(coin)
             self.points += 10
-            print(self.name, " has ",self.points," points")
+            print(self.name, " has ",self.points," points.","(",self.level_no,")")
 
+    def is_finished(self):
         for flag in pg.sprite.spritecollide(self, self.level.checkpoints, False):
-            self.level.checkpoints.remove(flag)
             self.points += 50
-            print(self.name, " has ",self.points," points")
+            print(self.name, " has ",self.points," points.","(",self.level_no,")")
+
+            return True 
         
         
 if __name__ == '__main__':
