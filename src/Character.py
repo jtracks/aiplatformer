@@ -20,7 +20,7 @@ class Character(pg.sprite.Sprite):
     :param name: Indentifier for character, defaults to 'Player 1'
     :type name: str, optional
 
-    :param character: Name of assets for textures, defaults to 'Ninja frog'
+    :param character: Name of assets for textures, defaults to 'Ninja_Frog'
     :type character: str, optional
 
     '''
@@ -44,7 +44,7 @@ class Character(pg.sprite.Sprite):
     #: Index of current level
     level_no = 0
 
-    def __init__(self, name='Player 1', character='Ninja frog'):
+    def __init__(self, name='Player 1', character='Ninja_Frog'):
         ''' Initializer '''
 
         super(Character, self).__init__()
@@ -164,7 +164,7 @@ class Character(pg.sprite.Sprite):
         Jump button call
         
         Jump if on ground
-        Double jump
+        Double jump if in the air (once)
 
          '''
         

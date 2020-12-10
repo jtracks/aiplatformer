@@ -7,6 +7,7 @@ surfaces for the gamescreen to use.
 '''
 
 import os
+import sys
 import pygame as pg
 from PIL import Image
 from os.path import join
@@ -15,7 +16,16 @@ import random
 
 load = pg.image.load
 
-PROJECT_PATH = os.path.dirname(os.path.dirname(__file__))
+def projectpath():
+    ''' Get absolute path to resource, works for dev and for PyInstaller '''
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        return getattr(sys, '_MEIPASS')
+    except Exception:
+        return os.path.dirname(os.path.dirname(__file__))
+
+
+PROJECT_PATH = projectpath()
 PATH_TO_CHAR = join(PROJECT_PATH, 'assets', 'Main_Characters')
 PATH_TO_BACKGROUND = join(PROJECT_PATH, 'assets', 'Background')
 PATH_TO_TERRAIN = join(PROJECT_PATH, 'assets', 'Terrain')
