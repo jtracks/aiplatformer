@@ -1,5 +1,10 @@
+
 '''
-Import configurations from this class
+Config
+--------------
+
+Import configurations from this class such as number of bots, fps etc.
+
 '''
 
 NUMBER_OF_BOTS = 10

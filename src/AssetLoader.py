@@ -16,15 +16,15 @@ import random
 load = pg.image.load
 
 PROJECT_PATH = os.path.dirname(os.path.dirname(__file__))
-PATH_TO_CHAR = join(PROJECT_PATH), 'assets', 'Main_Characters')
-PATH_TO_BACKGROUND = join(os.path.dirname(PROJECT_PATH), 'assets', 'Background')
-PATH_TO_TERRAIN = join(os.path.dirname(PROJECT_PATH), 'assets', 'Terrain')
+PATH_TO_CHAR = join(PROJECT_PATH, 'assets', 'Main_Characters')
+PATH_TO_BACKGROUND = join(PROJECT_PATH, 'assets', 'Background')
+PATH_TO_TERRAIN = join(PROJECT_PATH, 'assets', 'Terrain')
 
 def load_asset(path, size_tuple, length_tuple=(1,1)):
     ''' Returns a list of surfaces with (len = length, size = size_tuple)
 
     :param path: Path to asset
-    :type path: string
+    :type path: str
 
     :param size_tuple: (width, length)
     :type size_tuple: (int, int)

@@ -1,5 +1,10 @@
 '''
-Contains the level basic class, Levels will inherit from this class to make a level
+Level
+---------
+
+Contains the level basic class, Levels will inherit from this class to make a level.
+Also contains the Platform class which specifies solid surfaces in the level.
+
 '''
 
 import pygame as pg
@@ -11,10 +16,22 @@ from AssetLoader import BACKGROUNDS, TERRAINS
 SCREEN_WIDTH, SCREEN_HIGHT = SCREEN['SIZE']
 
 class Level():
-    ''' Default level '''
+    ''' Default level 
     
+    :param player: Main character
+    :type player: Character
+    :param lvl_type: One of: ['Blue', 'Brown', 'Gray', 'Green', 'Pink', 'Purple', 'Yellow'], defaults to 'blue'
+    :type lvl_type: str, optional
+    :param ter_type: One of : ['Gray_Stone', 'Green_Dirt', 'Wood', 'Yellow_Dirt', 'Bricks', 'Leafs', 'Pink_Dirt'], defaults to 'Wood'
+    :type ter_type: str, optional
+
+    '''
+    
+    #: Level end x coordinates
     level_limit = -1000
+    #: How much the world is shifted in x
     world_shift = 0
+    #: Keeps track of all animation updates in level
     tick = 0
 
     def __init__(self, player, lvl_type='Blue',  ter_type='Wood'):
@@ -30,7 +47,8 @@ class Level():
             self.platforms.add(Platform(width, height, x, y, ter_type))
 
     def _platforms(self):
-        ''' Platform(width, height, x, y) '''
+        ''' Adds platforms to level 
+        Platform(width, height, x, y) '''
 
         ground = (5000, 96, self.level_limit, SCREEN_HIGHT - 64)
         left_block = (64, SCREEN_HIGHT-64, self.level_limit, 0)
@@ -51,7 +69,12 @@ class Level():
         self.enemies.update()
 
     def draw(self, screen):
-        ''' Draw content on screen '''
+        ''' Draw content on screen 
+        
+        :param screen: The game screen
+        :type: screen: pg.Surface
+        
+        '''
         
         if self.tick == 60:
             self.tick = 0
@@ -66,7 +89,12 @@ class Level():
         self.tick += 1
     
     def shift_world(self, speed_x):
-        ''' Scroll world '''
+        ''' Scroll world 
+        
+        :param screen: The delta in x
+        :type: screen: float
+
+        '''
 
         self.world_shift += speed_x
 
@@ -74,10 +102,22 @@ class Level():
             item.rect.x += speed_x
 
 class Platform(pg.sprite.Sprite):
-    ''' Platform the player can jump on '''
+    ''' Platform the player can jump on 
+    
+    :param width: Pixel width
+    :type width: int
+    :param height: Pixel Height
+    :type height: int
+    :param x: X coordinate of upper left corner
+    :type x: int
+    :param y: Y coordinate of upper left corner
+    :type y: int
+    :param ter_type: Terrain type of platform. One of: ['Gray_Stone', 'Green_Dirt', 'Wood', 'Yellow_Dirt', 'Bricks', 'Leafs', 'Pink_Dirt']
+    :type ter_type: str, optional
+    '''
  
     def __init__(self, width, height, x, y, ter_type='Wood'):
-        
+        ''' Initializer '''
         super(Platform,self).__init__()
         width -= (width % TERRAIN['SIZE'][0])
         height -= (height % TERRAIN['SIZE'][1])
@@ -90,6 +130,15 @@ class Platform(pg.sprite.Sprite):
         self.rect.y = y
 
     def _add_terrain(self, width, height, ter_type):
+        ''' Blits the terrain image onto the surface 
+        
+        :param width: Pixel width
+        :type width: int
+        :param height: Pixel Height
+        :type height: int
+        :param ter_type: Terrain type of platform. One of: ['Gray_Stone', 'Green_Dirt', 'Wood', 'Yellow_Dirt', 'Bricks', 'Leafs', 'Pink_Dirt']
+        :type ter_type: str, optional
+        '''
         
         terrain = TERRAINS[ter_type]
         ter_w, ter_h = TERRAIN['SIZE']

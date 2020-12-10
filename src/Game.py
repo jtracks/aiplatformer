@@ -1,4 +1,7 @@
 '''
+Game
+---------
+
 Runs the main game
 
 Handles the main game logic

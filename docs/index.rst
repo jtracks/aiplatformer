@@ -10,6 +10,8 @@ Welcome to Aiplatformer's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   about
+   usage
    modules
 
 Indices and tables
