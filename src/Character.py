@@ -1,3 +1,11 @@
+'''
+Character
+--------------
+
+Contains the Character class with defined how each playable character in the game moves.
+
+'''
+
 import pygame as pg
 from Config import SCREEN, MAIN_CHARACTER
 from AssetLoader import ANIMATIONS_CHAR
