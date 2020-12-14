@@ -13,7 +13,7 @@ FPS = 60
 
 # Screen dimensions
 SCREEN = {
-    'SIZE': (1000, 750) #(800, 600)
+    'SIZE': (800, 600) #(800, 600)
 }
 
 # 'Mask Dude', 'Ninja frog', 'Pink Man', 'Virtual Guy'
@@ -31,6 +31,16 @@ TERRAIN = {
 BACKGROUND = {
     'NAME': ['Blue', 'Brown', 'Gray', 'Green', 'Pink', 'Purple', 'Yellow'],
     'SIZE': (64, 64)
+}
+
+COLLECTIBLE = {
+    'NAME': ['Apple'],
+    'SIZE': (32,32)
+}
+
+CHECKPOINT = {
+    'NAME': ['Flag'],
+    'SIZE': (128,128)
 }
 
 

@@ -29,6 +29,8 @@ PROJECT_PATH = projectpath()
 PATH_TO_CHAR = join(PROJECT_PATH, 'assets', 'Main_Characters')
 PATH_TO_BACKGROUND = join(PROJECT_PATH, 'assets', 'Background')
 PATH_TO_TERRAIN = join(PROJECT_PATH, 'assets', 'Terrain')
+PATH_TO_ITEMS = join(PROJECT_PATH, 'assets', 'Items', 'Fruits')
+PATH_TO_CHECKPOINTS = join(PROJECT_PATH, 'assets', 'Items', 'Checkpoints', 'Checkpoint')
 
 def load_asset(path, size_tuple, length_tuple=(1,1)):
     ''' Returns a list of surfaces with (len = length, size = size_tuple)
@@ -106,6 +108,16 @@ for character in MAIN_CHARACTER['NAME']:
 BACKGROUNDS = {}
 for bgr in BACKGROUND['NAME']:
     BACKGROUNDS[bgr] = fill_background(load_asset(join(PATH_TO_BACKGROUND, f'{bgr}.png'), BACKGROUND['SIZE'], (1,1)))
+
+# Collectibles 
+COLLECTIBLES = {}
+for item in COLLECTIBLE['NAME']:
+    COLLECTIBLES[item] = load_asset(join(PATH_TO_ITEMS,'Apple.png'),COLLECTIBLE['SIZE'],(17,1))
+
+CHECKPOINTS = {}
+for item in CHECKPOINT['NAME']: 
+    CHECKPOINTS[item] = load_asset(join(PATH_TO_CHECKPOINTS,'Checkpoint_(Flag_Out)_(64x64).png'),CHECKPOINT['SIZE'],(26,1))
+
 
 # Load terrains, kinda weirdly done but works
 t = load_asset(join(PATH_TO_TERRAIN,'Terrain_(16x16).png'),TERRAIN['SIZE'], (22,11))

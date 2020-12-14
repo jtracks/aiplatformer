@@ -10,6 +10,7 @@ import pygame as pg
 from Config import SCREEN, MAIN_CHARACTER
 from AssetLoader import ANIMATIONS_CHAR
 
+
 SCREEN_HEIGHT, SCREEN_WIDTH = SCREEN['SIZE']
 
 class Character(pg.sprite.Sprite):
@@ -43,10 +44,11 @@ class Character(pg.sprite.Sprite):
     double_jump = True
     #: Index of current level
     level_no = 0
+    #: Current amount of points
+    points = 0 
 
     def __init__(self, name='Player 1', character='Ninja_Frog'):
         ''' Initializer '''
-
         super(Character, self).__init__()
 
         self.name = name
@@ -60,6 +62,7 @@ class Character(pg.sprite.Sprite):
         self._gravity()
         self._friction()
         self._move()
+        self._collect()
 
         # Update every 3
         if self.tick == 3:
@@ -201,6 +204,22 @@ class Character(pg.sprite.Sprite):
     def _tint_image(self):
         ''' for subclasses to be able to tint '''
         pass
+
+    def _collect(self):
+        import Game
+
+        for coin in pg.sprite.spritecollide(self, self.level.collectibles, False):
+            self.level.collectibles.remove(coin)
+            self.points += 10
+            print(self.name, " has ",self.points," points.","(",self.level_no,")")
+
+    def is_finished(self):
+        for flag in pg.sprite.spritecollide(self, self.level.checkpoints, False):
+            self.points += 50
+            print(self.name, " has ",self.points," points.","(",self.level_no,")")
+
+            return True 
+        
         
 if __name__ == '__main__':
 
