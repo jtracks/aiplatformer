@@ -4,9 +4,11 @@ Contains the level basic class, Levels will inherit from this class to make a le
 
 import pygame as pg
 import random
+from Collectibles import Collectible
+from Checkpoints import Checkpoint 
 from itertools import chain
-from Config import SCREEN, BACKGROUND, TERRAIN
-from AssetLoader import BACKGROUNDS, TERRAINS
+from Config import SCREEN, BACKGROUND, TERRAIN, COLLECTIBLE
+from AssetLoader import BACKGROUNDS, TERRAINS, COLLECTIBLES
 
 SCREEN_WIDTH, SCREEN_HIGHT = SCREEN['SIZE']
 
@@ -23,11 +25,19 @@ class Level():
         self.enemies = pg.sprite.Group()
         self.bots = pg.sprite.Group()
         self.player = player
+        self.collectibles = pg.sprite.Group() 
+        self.checkpoints = pg.sprite.Group()
         self.level_type = lvl_type
         self.terrain_type = ter_type
 
         for width, height, x, y in self._platforms():
             self.platforms.add(Platform(width, height, x, y, ter_type))
+
+        for x, y in self._collectibles(): 
+            self.collectibles.add(Collectible(x,y))
+
+        for x,y in self._checkpoints(): 
+            self.checkpoints.add(Checkpoint(x,y))
 
     def _platforms(self):
         ''' Platform(width, height, x, y) '''
@@ -43,12 +53,27 @@ class Level():
 
         return [ground, left_block, right_block, roof, wall, big_block, platform1, platform2]
 
+    def _collectibles(self):
+        coins = []
+        coins.append((800,400))
+        coins.append((200,200))
+
+        return coins
+
+    def _checkpoints(self):
+        checkpoints = []
+        checkpoints.append((1700,184))
+
+        return checkpoints
+
 
     def update(self):
         ''' Update everything '''
 
         self.platforms.update()
         self.enemies.update()
+        self.collectibles.update()
+        self.checkpoints.update()
 
     def draw(self, screen):
         ''' Draw content on screen '''
@@ -62,6 +87,8 @@ class Level():
 
         self.platforms.draw(screen)
         self.enemies.draw(screen)
+        self.collectibles.draw(screen)
+        self.checkpoints.draw(screen)
 
         self.tick += 1
     
@@ -70,7 +97,7 @@ class Level():
 
         self.world_shift += speed_x
 
-        for item in chain(self.platforms, self.enemies, self.bots):
+        for item in chain(self.platforms, self.enemies, self.bots,self.collectibles,self.checkpoints):
             item.rect.x += speed_x
 
 class Platform(pg.sprite.Sprite):
@@ -90,7 +117,7 @@ class Platform(pg.sprite.Sprite):
         self.rect.y = y
 
     def _add_terrain(self, width, height, ter_type):
-        
+
         terrain = TERRAINS[ter_type]
         ter_w, ter_h = TERRAIN['SIZE']
 
@@ -114,4 +141,7 @@ class Platform(pg.sprite.Sprite):
         self.image.blit(terrain['TOP RIGHT'], (width-ter_w, 0))
         self.image.blit(terrain['BOTTOM LEFT'], (0, height-ter_h))
         self.image.blit(terrain['BOTTOM RIGHT'], (width-ter_w, height-ter_h))
+
+
+        
         
