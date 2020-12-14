@@ -1,3 +1,13 @@
+'''
+AssetLoader
+--------------
+
+Responsible for calling Config.py to load the textures and provide
+surfaces for the gamescreen to use.
+'''
+
+import os
+import sys
 import pygame as pg
 from PIL import Image
 from os.path import join
@@ -6,8 +16,39 @@ import random
 
 load = pg.image.load
 
+def projectpath():
+    ''' Get absolute path to resource, works for dev and for PyInstaller '''
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        return getattr(sys, '_MEIPASS')
+    except Exception:
+        return os.path.dirname(os.path.dirname(__file__))
+
+
+PROJECT_PATH = projectpath()
+PATH_TO_CHAR = join(PROJECT_PATH, 'assets', 'Main_Characters')
+PATH_TO_BACKGROUND = join(PROJECT_PATH, 'assets', 'Background')
+PATH_TO_TERRAIN = join(PROJECT_PATH, 'assets', 'Terrain')
+PATH_TO_ITEMS = join(PROJECT_PATH, 'assets', 'Items', 'Fruits')
+PATH_TO_CHECKPOINTS = join(PROJECT_PATH, 'assets', 'Items', 'Checkpoints', 'Checkpoint')
+
 def load_asset(path, size_tuple, length_tuple=(1,1)):
-    ''' Returns a list of surfaces with (len = length, size = size_tuple)'''
+    ''' Returns a list of surfaces with (len = length, size = size_tuple)
+
+    :param path: Path to asset
+    :type path: str
+
+    :param size_tuple: (width, length)
+    :type size_tuple: (int, int)
+
+    :param length_tuple: (width, length), defaults to (1, 1)
+    :type length_tuple: (int, int)
+
+
+    :return: Transformed list of surface
+    :rtype: [pg.Surface]
+
+    '''
    
     if length_tuple == (1,1):
         bitmap = pg.image.load(path)
@@ -28,6 +69,15 @@ def load_asset(path, size_tuple, length_tuple=(1,1)):
         return surface_list  
 
 def fill_background(bgr_image):
+    ''' Blits the background image onto the screen in a mosaic pattern 
+    
+    :param bgr_image: Background image
+    :type br_image: [pg.Surface]
+
+    :return: Screen image
+    :rtype: pg.Surface
+
+    '''
 
     sw, sh = SCREEN['SIZE']
     bw, bh = bgr_image[0].get_size()
@@ -39,12 +89,6 @@ def fill_background(bgr_image):
             background.blit(bgr_image[0], (x*bw, y*bh))  
 
     return background 
-
-PATH_TO_CHAR = join('assets', 'Main_Characters')
-PATH_TO_BACKGROUND = join('assets', 'Background')
-PATH_TO_TERRAIN = join('assets', 'Terrain')
-PATH_TO_ITEMS = join('assets','Items','Fruits')
-PATH_TO_CHECKPOINTS = join('assets','Items','Checkpoints','Checkpoint')
 
 # Animations for the main character
 ANIMATIONS_CHAR = {}

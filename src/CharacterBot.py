@@ -1,13 +1,29 @@
+'''
+Character
+--------------
 
+Contains the CharacterBot class with is a Character but controlled by the cpu.
+
+'''
 import pygame as pg
+import numpy as np
 from Character import Character
-from numpy.random import choice
 from random import randint
 from Config import MAIN_CHARACTER
 from functools import lru_cache
 
 class CharacterBot(Character):
-    ''' The main character sprite in the game '''
+    ''' A character controller by the cpu.
+
+    Extension of :class: `pg.sprite.Sprite` and :class: `Character`.
+
+    :param name: Indentifier for character, defaults to 'Player 1'
+    :type name: str, optional
+
+    :param character: Name of assets for textures, defaults to 'Ninja frog'
+    :type character: str, optional
+
+    '''
 
     width, height = MAIN_CHARACTER['SIZE'] 
     speed_x , speed_y = (0, 0)
@@ -29,10 +45,17 @@ class CharacterBot(Character):
 
     @lru_cache(maxsize=None)
     def _get_tint(self):
+        ''' Returns a random color to tint the character in.
+
+        :return: Color
+        :rtype: (int, int, int)
+
+        '''
         return (randint(0,255), randint(0,255), randint(0,255))
 
     def random_action(self):
-        actions = choice([[self.jump], [self.jump, self.right], [self.jump, self.left], [self.right], [self.left]],
+        ''' Do a random action '''
+        actions = np.random.choice([[self.jump], [self.jump, self.right], [self.jump, self.left], [self.right], [self.left]],
             1,
             [0.03, 0.06, 0.01, 0.70, 0.20]
             )

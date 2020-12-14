@@ -1,3 +1,11 @@
+'''
+Character
+--------------
+
+Contains the Character class with defined how each playable character in the game moves.
+
+'''
+
 import pygame as pg
 from Config import SCREEN, MAIN_CHARACTER
 from AssetLoader import ANIMATIONS_CHAR
@@ -6,22 +14,41 @@ from AssetLoader import ANIMATIONS_CHAR
 SCREEN_HEIGHT, SCREEN_WIDTH = SCREEN['SIZE']
 
 class Character(pg.sprite.Sprite):
-    ''' The main character sprite in the game '''
+    ''' The main character sprite in the game 
 
+    Extension of :class: `pg.sprite.Sprite`.
+
+    :param name: Indentifier for character, defaults to 'Player 1'
+    :type name: str, optional
+
+    :param character: Name of assets for textures, defaults to 'Ninja_Frog'
+    :type character: str, optional
+
+    '''
+
+    #: Amount of pixels 
     width, height = MAIN_CHARACTER['SIZE'] 
+    #: Speed in axis
     speed_x , speed_y = (0, 0)
+    #: Reference to Level currently occupied by character
     level = None
+    #: Keeps tracks of animation tick
     tick = 1
-    state = 'IDLE' # ['DOUBLE JUMP', 'FALL', 'HIT', 'IDLE', 'JUMP', 'RUN', 'WALL JUMP']
+    #: State: ['DOUBLE JUMP', 'FALL', 'HIT', 'IDLE', 'JUMP', 'RUN', 'WALL JUMP']
+    state = 'IDLE' 
+    #: Index for the current animation image
     state_img = 0
-    direction = 'RIGHT' #['LEFT', 'RIGHT']
+    #: Direction: ['LEFT', 'RIGHT']
+    direction = 'RIGHT' 
+    #: If the character has its double jump
     double_jump = True
-    level = None
+    #: Index of current level
     level_no = 0
-
+    #: Current amount of points
     points = 0 
 
-    def __init__(self, name='Player 1', character='Ninja frog'):
+    def __init__(self, name='Player 1', character='Ninja_Frog'):
+        ''' Initializer '''
         super(Character, self).__init__()
 
         self.name = name
@@ -30,7 +57,7 @@ class Character(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
 
     def update(self):
-        ''' Update position, movementspeed and animation, called once every fps'''
+        ''' Updates position, movementspeed and animation, called once every frame'''
 
         self._gravity()
         self._friction()
@@ -46,7 +73,9 @@ class Character(pg.sprite.Sprite):
             self.tick += 1
 
     def _gravity(self):
-        ''' NOT DONE TODO '''
+        ''' Invokes gravity on the sprite. Accelerates downwards linearly.
+        Also handler collitions with walls, floors and roofs.
+        '''
         self.speed_y += 0.5
         if self.speed_y >= 0 and self.state in['JUMP', 'DOUBLE JUMP']:
             self._change_state('FALL')
@@ -67,7 +96,7 @@ class Character(pg.sprite.Sprite):
                 self.speed_y = 2
 
     def _friction(self):
-        ''' Slow down in x '''
+        ''' Slow down linearly in x axis '''
 
         if self.speed_x > 0.0:
             self.speed_x -= 0.5
@@ -123,7 +152,12 @@ class Character(pg.sprite.Sprite):
         self.state_img += 1
 
     def _change_state(self, new_state):
-        ''' Update state with different behavior'''
+        ''' Update state with different behavior
+        
+        :param new_state: One of the states: ['DOUBLE JUMP', 'FALL', 'HIT', 'IDLE', 'JUMP', 'RUN', 'WALL JUMP']
+        :type new_state: str
+        
+        '''
 
         self.state_img = 0
         self.state = new_state
@@ -133,7 +167,7 @@ class Character(pg.sprite.Sprite):
         Jump button call
         
         Jump if on ground
-        Double jump
+        Double jump if in the air (once)
 
          '''
         
